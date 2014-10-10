@@ -6,6 +6,14 @@ import org.eclipse.jetty.server.Request;
 /**
  * Created by wanghm on 2014/9/30.
  */
-public abstract class AbstractRESTCmdlet {
-    public abstract AbstractRESTResult execute(Request request);
+public class AbstractRESTCmdlet {
+    private String methodName;
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
 }
