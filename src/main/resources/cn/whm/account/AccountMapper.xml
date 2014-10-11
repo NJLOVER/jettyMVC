@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.whm.portal.account.entity.AccountMapper">
+	<resultMap id="BaseResultMap" type="cn.whm.portal.account.entity.Account">
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="province_code" property="provinceCode"
+			jdbcType="VARCHAR" />
+		<result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+		<result column="province_no" property="provinceNo" jdbcType="VARCHAR" />
+		<result column="city_no" property="cityNo" jdbcType="VARCHAR" />
+		<result column="src_sys_id" property="srcSysId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		Id, province_code, city_code, province_no,
+		city_no,src_sys_id
+	</sql>
+
+	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from crm_city_code
+		where Id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from crm_city_code
+		where Id
+		= #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="cn.whm.portal.city.entity.city">
+		insert into crm_city_code
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				Id,
+			</if>
+			<if test="provinceCode != null">
+				province_code,
+			</if>
+			<if test="cityCode != null">
+				city_code,
+			</if>
+			<if test="provinceNo != null">
+				province_no,
+			</if>
+			<if test="cityNo != null">
+				city_no,
+			</if>
+			<if test="srcSysId != null">
+				src_sys_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceCode != null">
+				#{provinceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cityCode != null">
+				#{cityCode,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceNo != null">
+				#{provinceNo,jdbcType=VARCHAR},
+			</if>
+			<if test="cityNo != null">
+				#{cityNo,jdbcType=VARCHAR},
+			</if>
+			<if test="srcSysId != null">
+				#{srcSysId,jdbcType=VARCHAR},
+			</if>			
+			
+		</trim>
+	</insert>
+
+	<update id="update" parameterType="cn.whm.portal.city.entity.city">
+		update crm_city_code
+		<set>
+			<if test="provinceCode != null">
+				province_code = #{provinceCode,jdbcType=VARCHAR},
+			</if>
+			<if test="cityCode != null">
+				city_code = #{cityCode,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceNo != null">
+				province_no = #{provinceNo,jdbcType=VARCHAR},
+			</if>
+			<if test="cityNo != null">
+				city_no = #{cityNo,jdbcType=VARCHAR},
+			</if>
+			<if test="srcSysId != null">
+				src_sys_id = #{srcSysId,jdbcType=VARCHAR},
+			</if>			
+			
+		</set>
+		where Id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="findCityNoByProvinceCityCode" resultMap="BaseResultMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from crm_city_code
+		<where>
+			<if test="provinceCode != null">
+				province_code = #{provinceCode,jdbcType=VARCHAR}
+			</if>
+			<if test="cityCode != null">
+				and city_code = #{cityCode,jdbcType=VARCHAR}
+			</if>
+			<if test="srcSysId != null">
+				and src_sys_id = #{srcSysId,jdbcType=VARCHAR}
+			</if>			
+			
+		</where>
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from crm_city_code
+	</select>
+</mapper>

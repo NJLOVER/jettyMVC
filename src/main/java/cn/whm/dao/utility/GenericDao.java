@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by wanghm on 2014/10/9.
  */
 public interface GenericDao<E, PK extends Serializable> {
-    E getById(PK id) throws DataAccessException;
+    E getByid(PK id) throws DataAccessException;
 
     int deleteById(PK id) throws DataAccessException;
 

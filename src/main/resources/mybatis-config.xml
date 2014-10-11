@@ -21,7 +21,7 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="mysql_datasource"/>
-        <property name="mapperLocations" value="classpath:cn/whm/*"/>
+        <property name="mapperLocations" value="classpath:/cn/whm/*/*Mapper.xml"/>
     </bean>
 
     <!--事物管理器配置 使用jdbc事物 -->

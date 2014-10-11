@@ -3,6 +3,7 @@ package cn.whm.handler;
 import cn.whm.rest.RESTAnnotation;
 import cn.whm.rest.UTF8Request;
 import cn.whm.result.AbstractRESTResult;
+import cn.whm.result.JsonRESTResult;
 import cn.whm.utils.SpringUtilsContext;
 import org.apache.commons.beanutils.MethodUtils;
 import org.eclipse.jetty.http.HttpMethods;
@@ -37,6 +38,9 @@ public class DispathRestFullHandler extends AbstractHandler{
 
         PostMap.put("/*",new DebugRESTCmdlet());
         GetMap.put("/*",new DebugRESTCmdlet());
+    }
+    public void init() throws Exception{
+        scanHandler();
     }
 
     private void scanHandler() throws Exception{
@@ -95,10 +99,16 @@ public class DispathRestFullHandler extends AbstractHandler{
         AbstractRESTResult result = null;
         logger.info("-->URI:{},Method :{}",new Object[]{utf8Request.getUri(),utf8Request.getMethod()});
         try {
+            if(methodName == null){
+                methodName = "execute";
+            }
             result = (AbstractRESTResult)MethodUtils.invokeMethod(cmdlet,methodName,utf8Request);
+            request.setHandled(true);
         } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
+            JsonRESTResult jsonRESTResult = new JsonRESTResult();
+            jsonRESTResult.setStatusCode(500);
+            result = jsonRESTResult;
+            logger.error("-->URI:{} 没找到对应的处理方法!", new Object[]{utf8Request.getUri()});
         }
         httpServletResponse.getWriter().write(result.toHttpResponse());
         long end=System.currentTimeMillis();

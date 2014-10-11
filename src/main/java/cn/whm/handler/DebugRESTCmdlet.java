@@ -14,7 +14,7 @@ import java.util.Enumeration;
  */
 public class DebugRESTCmdlet extends AbstractRESTCmdlet{
     Logger logger = LoggerFactory.getLogger(DebugRESTCmdlet.class);
-    @Override
+
     public AbstractRESTResult execute(Request request){
         PlainTextRESTResult plainTextRESTResult = new PlainTextRESTResult();
         Writer  req_writer = plainTextRESTResult.getWriter();
@@ -39,6 +39,6 @@ public class DebugRESTCmdlet extends AbstractRESTCmdlet{
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return plainTextRESTResult;
     }
 }

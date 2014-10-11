@@ -1,5 +1,6 @@
 package cn.whm.com.server;
 
+import cn.whm.handler.DispathRestFullHandler;
 import com.alibaba.fastjson.JSONObject;
 import org.eclipse.jetty.http.HttpStatus;
 import org.eclipse.jetty.server.Connector;
@@ -21,29 +22,10 @@ import java.util.List;
  */
 public class TestServerStart {
     private static Logger logger = LoggerFactory.getLogger(TestServerStart.class);
-    public static void main(String[] args) {
-        Server httpServer = new Server();
-        QueuedThreadPool threadPool = new QueuedThreadPool();
-        threadPool.setMaxThreads(100);
-        threadPool.setMinThreads(10);
-        httpServer.setThreadPool(threadPool);
-        SelectChannelConnector selectChannelConnector = new SelectChannelConnector();
-        selectChannelConnector.setPort(8080);
-        selectChannelConnector.setHost("");
-        Connector[] connectors = {selectChannelConnector};
-        httpServer.setConnectors(connectors);
-        HandlerList handlerList = new HandlerList();
-        DefaultHandler defaultHandler = new DefaultHandler();
-        handlerList.addHandler(defaultHandler);
+    public static void main(String[] args) throws Exception{
         //启动spring框架.
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classPath:spring-config.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring-config.xml");
         applicationContext.getClass();
-        httpServer.setHandler(handlerList);
-        try {
-            httpServer.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         logger.info("service Started");
     }
 

@@ -11,9 +11,9 @@
         <constructor-arg value="cn.whm.portal"/>
     </bean>
     <context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
-    <context:property-placeholder location="" ignore-unresolvable="true"/>
 
     <context:component-scan base-package="cn.whm"/>
     <import resource="classpath:mybatis-config.xml"/>
-
+    <import resource="classpath:RESTfull-config.xml"/>
+    <import resource="classpath:jetty-config.xml"/>
 </beans>
