@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system/>
+    <xml fileName="mail.config.xml">
+        <reloadingStrategy refreshDelay="6000"
+                           config-class="org.apache.commons.configuration.reloading.FileChangedReloadingStrategy"/>
+    </xml>
+    <properties fileName="app.properties">
+        <reloadingStrategy refreshDelay="5000"
+                           config-class="org.apache.commons.configuration.reloading.FileChangedReloadingStrategy"/>
+    </properties>
+
+</configuration>

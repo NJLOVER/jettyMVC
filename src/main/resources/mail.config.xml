@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mail-config>
+	<mail>
+		<smtp>
+			<host>smtp.exmail.qq.com</host>
+			<port>25</port>
+		</smtp>
+		<username>noreply@ctyun.cn</username>
+		<password>ctyun007</password>
+		<email>noreply@ctyun.cn</email>
+		<nickname>天翼云</nickname>
+	</mail>
+</mail-config>
