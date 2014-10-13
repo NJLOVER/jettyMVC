@@ -3,6 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="connect_factory" class="com.rabbitmq.client.ConnectionFactory">
-        <property name="host" value=""/>
+        <property name="host" value="${rabbitmq.host}"/>
+        <property name="virtualHost" value="${rabbitmq.host}"/>
+        <property name="username" value="${rabbitmq.user}"/>
+        <property name="password" value="${rabbitmq.password}"/>
+    </bean>
+
+    <bean id="amqp_publisher" class="cn.whm.amqp.publisher.MessagePublisher">
+        <property name="connectionFactory" ref="connect_factory"/>
+        <property name="concurrentThread" value="20"/>
     </bean>
 </beans>
