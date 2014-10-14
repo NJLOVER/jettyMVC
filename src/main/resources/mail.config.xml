@@ -9,5 +9,6 @@
 		<password>ctyun007</password>
 		<email>noreply@ctyun.cn</email>
 		<nickname>天翼云</nickname>
+        <threadcount>20</threadcount>
 	</mail>
 </mail-config>
