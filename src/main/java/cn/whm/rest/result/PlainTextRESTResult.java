@@ -1,4 +1,4 @@
-package cn.whm.result;
+package cn.whm.rest.result;
 
 import java.io.StringWriter;
 

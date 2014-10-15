@@ -1,7 +1,7 @@
-package cn.whm.handler;
+package cn.whm.rest.handler;
 
-import cn.whm.result.AbstractRESTResult;
-import cn.whm.result.PlainTextRESTResult;
+import cn.whm.rest.result.AbstractRESTResult;
+import cn.whm.rest.result.PlainTextRESTResult;
 import org.eclipse.jetty.server.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

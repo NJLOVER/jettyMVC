@@ -7,12 +7,15 @@
                           http://www.springframework.org/schema/context
                           http://www.springframework.org/schema/context/spring-context.xsd">
     <bean id="springContextUtils" class="cn.whm.utils.SpringUtilsContext"></bean>
+    <bean id="bpmnTest" class="cn.whm.activiti.DynamicActivitiProcessTest"/>
     <bean id="reflections" class="org.reflections.Reflections">
         <constructor-arg value="cn.whm.portal"/>
     </bean>
     <context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:activiti.properties" ignore-unresolvable="true"/>
 
     <context:component-scan base-package="cn.whm"/>
+    <import resource="classpath:activiti-config.xml"/>
     <import resource="classpath:mybatis-config.xml"/>
     <import resource="classpath:RESTfull-config.xml"/>
     <import resource="classpath:jetty-config.xml"/>

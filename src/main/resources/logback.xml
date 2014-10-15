@@ -46,7 +46,7 @@
 
     <logger name="cn.whm" level="DEBUG"/>
 
-    <logger name="jdbc.connection" level="ERROR"/>
+    <logger name="org.activiti" level="DEBUG"/>
     <logger name="jdbc.audit" level="ERROR"/>
     <logger name="jdbc.sqlonly" level="INFO"/>
     <logger name="jdbc.resultset" level="ERROR"/>

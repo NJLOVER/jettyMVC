@@ -1,4 +1,4 @@
-package cn.whm.result;
+package cn.whm.rest.result;
 
 import cn.whm.utils.JsonUtils;
 

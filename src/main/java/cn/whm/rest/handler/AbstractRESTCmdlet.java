@@ -1,7 +1,4 @@
-package cn.whm.handler;
-
-import cn.whm.result.AbstractRESTResult;
-import org.eclipse.jetty.server.Request;
+package cn.whm.rest.handler;
 
 /**
  * Created by wanghm on 2014/9/30.

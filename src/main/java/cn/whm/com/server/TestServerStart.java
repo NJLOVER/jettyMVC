@@ -1,25 +1,11 @@
 package cn.whm.com.server;
 
-import cn.whm.amqp.publisher.MessagePublisher;
-import cn.whm.email.EmailSendUtils;
-import cn.whm.handler.DispathRestFullHandler;
-import com.alibaba.fastjson.JSONObject;
-import org.eclipse.jetty.http.HttpStatus;
-import org.eclipse.jetty.server.Connector;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.DefaultHandler;
-import org.eclipse.jetty.server.handler.HandlerList;
-import org.eclipse.jetty.server.nio.SelectChannelConnector;
-import org.eclipse.jetty.util.thread.QueuedThreadPool;
-import org.eclipse.jetty.util.thread.ThreadPool;
+import cn.whm.activiti.DynamicActivitiProcessTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -33,6 +19,8 @@ public class TestServerStart {
         applicationContext.getClass();
         logger.info("service Started");
 
+        DynamicActivitiProcessTest dynamicActivitiProcessTest = (DynamicActivitiProcessTest)applicationContext.getBean("bpmnTest");
+        dynamicActivitiProcessTest.testDynamicDeploy();
         //EmailSendUtils sendUtils = (EmailSendUtils)applicationContext.getBean("mailUtils");
         //sendUtils.sendMail("test","test","459519543@qq.com");
 

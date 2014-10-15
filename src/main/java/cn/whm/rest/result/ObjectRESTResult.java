@@ -1,4 +1,4 @@
-package cn.whm.result;
+package cn.whm.rest.result;
 
 /**
  * Created by wanghm on 2014/9/30.

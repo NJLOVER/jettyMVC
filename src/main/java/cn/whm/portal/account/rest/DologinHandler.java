@@ -1,8 +1,8 @@
 package cn.whm.portal.account.rest;
 
-import cn.whm.handler.AbstractRESTCmdlet;
+import cn.whm.rest.handler.AbstractRESTCmdlet;
 import cn.whm.rest.RESTAnnotation;
-import cn.whm.result.JsonRESTResult;
+import cn.whm.rest.result.JsonRESTResult;
 import org.eclipse.jetty.http.HttpMethods;
 import org.eclipse.jetty.server.Request;
 import org.slf4j.Logger;
