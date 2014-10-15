@@ -1,6 +1,7 @@
 package cn.whm.com.server;
 
 import cn.whm.amqp.publisher.MessagePublisher;
+import cn.whm.email.EmailSendUtils;
 import cn.whm.handler.DispathRestFullHandler;
 import com.alibaba.fastjson.JSONObject;
 import org.eclipse.jetty.http.HttpStatus;
@@ -32,14 +33,14 @@ public class TestServerStart {
         applicationContext.getClass();
         logger.info("service Started");
 
-
-
+        //EmailSendUtils sendUtils = (EmailSendUtils)applicationContext.getBean("mailUtils");
+        //sendUtils.sendMail("test","test","459519543@qq.com");
 
         //MessagePublisher messagePublisher = (MessagePublisher)applicationContext.getBean("amqp_publisher");
         //rabbitmq的发送测试,需要先在rabbitmq服务器上配置一个
         // message_router的exchange和一个叫queue.debug.test的queue,
         //同时绑定路由-->debug.test,也可以考虑在项目启动时初始化这些配置,
-        // 代码应该写在messagePublisher.init()方法中.
+        //代码应该写在messagePublisher.init()方法中.
         //messagePublisher.sendMessage("debug.test","hello");
     }
     public void testExecutorService(){

@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * Created by wanghm on 2014/10/9.
+ * 解决jetty的request.getHeader编码问题
  */
 public class UTF8Request extends Request {
     public UTF8Request(AbstractHttpConnection connection) {

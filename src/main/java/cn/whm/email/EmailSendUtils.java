@@ -47,12 +47,17 @@ public class EmailSendUtils {
         executorService = Executors.newFixedThreadPool(THREADCOUNT);
     }
 
+    public void stop(){
+        executorService.shutdown();
+    }
+
     private HtmlEmail getEmail(){
         HtmlEmail email = new HtmlEmail();
         defaultEmailConfig(email);
         return email;
     }
-
+    //默认配置的是腾讯企业邮箱服务器,需要使用对应的账号密码登陆
+    //使用协议为smtp.
     private void defaultEmailConfig(Email email){
         try{
             email.setHostName(SMTP_HOST);
