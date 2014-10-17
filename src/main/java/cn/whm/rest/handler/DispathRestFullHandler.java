@@ -67,7 +67,8 @@ public class DispathRestFullHandler extends AbstractHandler{
         String URI = annotation.URL();
 
         AbstractRESTCmdlet cmdlet = (AbstractRESTCmdlet) SpringContextUtils.getBeanByClass(clazz);
-        cmdlet.setMethodName(method.getName());
+        cmdlet.setMethod(method);
+        cmdlet.PreconfigureHooker();
         if(methods.equals(HttpMethods.GET)){
             GetMap.put(URI,cmdlet);
         }else if(methods.equals(HttpMethods.POST)){
@@ -94,14 +95,11 @@ public class DispathRestFullHandler extends AbstractHandler{
             return;
         }
 
-        String methodName = cmdlet.getMethodName();
+        Method method = cmdlet.getMethod();
         AbstractRESTResult result = null;
         logger.info("-->URI:{},Method :{}",new Object[]{utf8Request.getUri(),utf8Request.getMethod()});
         try {
-            if(methodName == null){
-                methodName = "execute";
-            }
-            result = (AbstractRESTResult)MethodUtils.invokeMethod(cmdlet,methodName,utf8Request);
+            result = cmdlet.execute(utf8Request,method);
             request.setHandled(true);
         } catch (Exception e) {
             JsonRESTResult jsonRESTResult = new JsonRESTResult();
