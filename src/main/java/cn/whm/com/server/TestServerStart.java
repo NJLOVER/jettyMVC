@@ -19,8 +19,7 @@ public class TestServerStart {
         applicationContext.getClass();
         logger.info("service Started");
 
-        DynamicActivitiProcessTest dynamicActivitiProcessTest = (DynamicActivitiProcessTest)applicationContext.getBean("bpmnTest");
-        dynamicActivitiProcessTest.testDynamicDeploy();
+
         //EmailSendUtils sendUtils = (EmailSendUtils)applicationContext.getBean("mailUtils");
         //sendUtils.sendMail("test","test","459519543@qq.com");
 

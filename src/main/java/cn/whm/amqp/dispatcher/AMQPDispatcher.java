@@ -3,7 +3,7 @@ package cn.whm.amqp.dispatcher;
 import cn.whm.amqp.core.MessageRouterExchange;
 import cn.whm.amqp.interfaces.DispatcherExchange;
 import cn.whm.amqp.interfaces.MessageRoute;
-import cn.whm.utils.SpringUtilsContext;
+import cn.whm.utils.SpringContextUtils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -74,7 +74,7 @@ public class AMQPDispatcher {
 
     private void configAMQPChannel(Channel channel) throws IOException {
         configExchange(channel);
-        Reflections reflections = SpringUtilsContext.getBean("reflections",Reflections.class);
+        Reflections reflections = SpringContextUtils.getBean("reflections", Reflections.class);
         Set<Class<?>> classSet = reflections.getTypesAnnotatedWith(MessageRoute.class);
         for(Class clazz : classSet){
             Annotation[] annotations = clazz.getAnnotations();
@@ -94,7 +94,7 @@ public class AMQPDispatcher {
         channel.queueDeclare(queneName,false,false,true,null);
         channel.queueBind(queneName,messageRoute.SourceExchange(),messageRoute.routeKey());
 
-        AbstractMessageCmdlet cmdlet = (AbstractMessageCmdlet)SpringUtilsContext.getBean(className);
+        AbstractMessageCmdlet cmdlet = (AbstractMessageCmdlet) SpringContextUtils.getBean(className);
         if(messageRoute.ConsumerCount()>0){
             cmdlet.setConsumerCount(messageRoute.ConsumerCount());
         }else{

@@ -4,7 +4,7 @@ import cn.whm.rest.RESTAnnotation;
 import cn.whm.rest.UTF8Request;
 import cn.whm.rest.result.AbstractRESTResult;
 import cn.whm.rest.result.JsonRESTResult;
-import cn.whm.utils.SpringUtilsContext;
+import cn.whm.utils.SpringContextUtils;
 import org.apache.commons.beanutils.MethodUtils;
 import org.eclipse.jetty.http.HttpMethods;
 import org.eclipse.jetty.http.PathMap;
@@ -43,7 +43,7 @@ public class DispathRestFullHandler extends AbstractHandler{
     }
 
     private void scanHandler() throws Exception{
-        Reflections reflections = SpringUtilsContext.getBean("reflections",Reflections.class);
+        Reflections reflections = SpringContextUtils.getBean("reflections", Reflections.class);
         Set<Class<?>> clazzSet = reflections.getTypesAnnotatedWith(Controller.class);
         for(Class clazz : clazzSet){
             Method[] methods = clazz.getDeclaredMethods();
@@ -66,7 +66,7 @@ public class DispathRestFullHandler extends AbstractHandler{
         String methods = annotation.Methods();
         String URI = annotation.URL();
 
-        AbstractRESTCmdlet cmdlet = (AbstractRESTCmdlet) SpringUtilsContext.getBeanByClass(clazz);
+        AbstractRESTCmdlet cmdlet = (AbstractRESTCmdlet) SpringContextUtils.getBeanByClass(clazz);
         cmdlet.setMethodName(method.getName());
         if(methods.equals(HttpMethods.GET)){
             GetMap.put(URI,cmdlet);

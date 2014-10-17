@@ -42,6 +42,11 @@ public class DynamicActivitiProcessTest {
     @Resource(name = "identityService")
     private IdentityService identityService;
 
+
+    public void testWorkFlow(){
+
+    }
+
     public void testDynamicDeploy()throws Exception{
         BpmnModel bpmnModel = new BpmnModel();
         Process process = new Process();
@@ -57,7 +62,7 @@ public class DynamicActivitiProcessTest {
         process.addFlowElement(createSequenceFlow("task1", "task2"));
         process.addFlowElement(createSequenceFlow("task2", "end"));
 
-        new BpmnAutoLayout(bpmnModel);
+        new BpmnAutoLayout(bpmnModel).execute();
 
         Deployment deployment = repositoryService.createDeployment()
                 .addBpmnModel("dynamic-model.bpmn",bpmnModel).name("Dynamic process deployment").deploy();
@@ -76,6 +81,14 @@ public class DynamicActivitiProcessTest {
         // 7. Save resulting BPMN xml to a file
         InputStream processBpmn = repositoryService.getResourceAsStream(deployment.getId(), "dynamic-model.bpmn");
         FileUtils.copyInputStreamToFile(processBpmn, new File("target/process.bpmn20.xml"));
+
+        //导出一个现有bpmn文件生成的视图
+        ProcessInstance processInstance2 = runtimeService
+                .startProcessInstanceByKey("depositflow");
+
+        InputStream processDiagram2 = repositoryService.getProcessDiagram(processInstance2.getProcessDefinitionId());
+        FileUtils.copyInputStreamToFile(processDiagram2, new File("target/diagram2.png"));
+
     }
 
     private UserTask createUserTask(String id,String name,String assignee){

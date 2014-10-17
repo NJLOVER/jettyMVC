@@ -6,7 +6,7 @@
                           http://www.springframework.org/schema/beans/spring-beans.xsd
                           http://www.springframework.org/schema/context
                           http://www.springframework.org/schema/context/spring-context.xsd">
-    <bean id="springContextUtils" class="cn.whm.utils.SpringUtilsContext"></bean>
+    <bean id="springContextUtils" class="cn.whm.utils.SpringContextUtils"></bean>
     <bean id="bpmnTest" class="cn.whm.activiti.DynamicActivitiProcessTest"/>
     <bean id="reflections" class="org.reflections.Reflections">
         <constructor-arg value="cn.whm.portal"/>
