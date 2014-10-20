@@ -23,7 +23,7 @@ public class AbstractRESTCmdlet {
     public AbstractRESTResult execute(Request request,Method method) throws Exception{
         return (AbstractRESTResult) MethodUtils.invokeMethod(this, method.getName(), request);
     }
-    public void PreconfigureHooker(){
+    public void PreconfigureHooker() throws Exception{
 
     }
 }
