@@ -62,7 +62,7 @@ public class DispathRestFullHandler extends AbstractHandler{
         }
     }
 
-    private void registerCmdlet(Class clazz,Method method,RESTAnnotation annotation){
+    private void registerCmdlet(Class clazz,Method method,RESTAnnotation annotation)throws Exception{
         String methods = annotation.Methods();
         String URI = annotation.URL();
 
