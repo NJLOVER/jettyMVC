@@ -105,7 +105,7 @@ public class DispathRestFullHandler extends AbstractHandler{
             JsonRESTResult jsonRESTResult = new JsonRESTResult();
             jsonRESTResult.setStatusCode(500);
             result = jsonRESTResult;
-            logger.error("-->URI:{} 没找到对应的处理方法!", new Object[]{utf8Request.getUri()});
+            logger.error("-->URI:{} 出现问题!", new Object[]{utf8Request.getUri()});
         }
         httpServletResponse.getWriter().write(result.toHttpResponse());
         long end=System.currentTimeMillis();

@@ -11,7 +11,7 @@ public class IntegerProcessor extends AbstractProcessor{
     @Override
     protected boolean doValidate(ParamInfo pi, String value) throws Exception{
         if(pi.isRequired()){
-            if(StringUtils.isEmpty(value)){
+            if(StringUtils.isEmpty(value) || pi.getDefaultValue() == null){
                 throw new Exception("int型参数"+pi.getValue()+"不能为空!");
             }
             int i = Integer.parseInt(value);
@@ -29,6 +29,7 @@ public class IntegerProcessor extends AbstractProcessor{
     @Override
     public Object processParam(ParamInfo pi, String value) throws Exception{
         if(doValidate(pi,value)){
+
            return  Integer.parseInt(value);
         }
         return null;

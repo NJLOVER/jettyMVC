@@ -3,8 +3,12 @@ package cn.whm.rest.handler;
 import cn.whm.rest.handler.REST.ParamInfoUtils;
 import cn.whm.rest.handler.REST.RequestSource;
 import cn.whm.rest.handler.REST.exception.InvalidReqParamException;
+import cn.whm.rest.handler.REST.processor.ParamProcessor;
+import cn.whm.rest.handler.REST.processor.ParamProcessorFactory;
 import cn.whm.rest.result.AbstractRESTResult;
 import cn.whm.rest.result.JsonRESTResult;
+import cn.whm.rest.result.ResultConst;
+import org.apache.commons.beanutils.MethodUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jetty.server.Request;
 import org.slf4j.Logger;
@@ -38,17 +42,36 @@ public class BasicRESTCmdlet extends AbstractRESTCmdlet {
         }
         return paramInfoList;
     }
-    public AbstractRESTResult execute(Request request) throws Exception{
+    public AbstractRESTResult execute(Request request) {
         JsonRESTResult result = new JsonRESTResult();
-        logRequestParam(request);
+        try{
+            logRequestParam(request);
+            return processRequest(request,result);
+        }catch (Exception e){
+            result.setStatusCode(ResultConst.ERROR.getValue());
+            result.setMsg(e.getMessage());
+        }
         return result;
     }
 
-    private AbstractRESTResult processRequest(Request request,JsonRESTResult restResult){
+    private AbstractRESTResult processRequest(Request request,JsonRESTResult restResult) throws Exception {
         List<Object> param_list = new ArrayList<Object>();
 
         for(ParamInfo paramInfo : paramInfoList){
+            ParamProcessor processor = ParamProcessorFactory.getParamProcessor(paramInfo);
+            Object param = processor.processParam(paramInfo,this.getReqValue(request,paramInfo));
 
+            param_list.add(param);
+        }
+        Object returnObj = MethodUtils.invokeMethod(this,this.getMethod().getName(),param_list.toArray());
+        if(returnObj instanceof AbstractRESTResult){
+            return (AbstractRESTResult)returnObj;
+        }else if( returnObj != null){
+            restResult.setReturnObj(returnObj);
+            restResult.setStatusCode(ResultConst.SUCESS.getValue());
+        }else{
+            restResult.setStatusCode(ResultConst.FAIL.getValue());
+            restResult.setMsg("nothing return!");
         }
         return restResult;
     }
