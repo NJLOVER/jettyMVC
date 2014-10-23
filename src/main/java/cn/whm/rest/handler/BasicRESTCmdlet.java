@@ -28,7 +28,6 @@ public class BasicRESTCmdlet extends AbstractRESTCmdlet {
 
     public void PreconfigureHooker() throws Exception{
         paramInfoList = analyseRESTRequestParam(this.getMethod());
-
     }
 
     private List<ParamInfo> analyseRESTRequestParam(Method method) throws Exception{
