@@ -20,8 +20,8 @@ public class AbstractRESTCmdlet {
     public void setMethod(Method method) {
         this.method = method;
     }
-    public AbstractRESTResult execute(Request request,Method method) throws Exception{
-        return (AbstractRESTResult) MethodUtils.invokeMethod(this, method.getName(), request);
+    public AbstractRESTResult execute(Request request) throws Exception{
+        return (AbstractRESTResult) MethodUtils.invokeMethod(this, this.method.getName(), request);
     }
     public void PreconfigureHooker() throws Exception{
 

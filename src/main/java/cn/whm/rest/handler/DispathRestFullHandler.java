@@ -95,11 +95,10 @@ public class DispathRestFullHandler extends AbstractHandler{
             return;
         }
 
-        Method method = cmdlet.getMethod();
         AbstractRESTResult result = null;
         logger.info("-->URI:{},Method :{}",new Object[]{utf8Request.getUri(),utf8Request.getMethod()});
         try {
-            result = cmdlet.execute(utf8Request,method);
+            result = cmdlet.execute(utf8Request);
             request.setHandled(true);
         } catch (Exception e) {
             JsonRESTResult jsonRESTResult = new JsonRESTResult();
